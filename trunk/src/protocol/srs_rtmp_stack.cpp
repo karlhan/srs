@@ -1743,6 +1743,7 @@ void SrsRequest::update_auth(SrsRequest* req)
     pageUrl = req->pageUrl;
     swfUrl = req->swfUrl;
     tcUrl = req->tcUrl;
+    param = req->param;
     
     if (args) {
         srs_freep(args);
@@ -1774,6 +1775,12 @@ void SrsRequest::strip()
     // remove start slash of app/stream
     app = srs_string_trim_start(app, "/");
     stream = srs_string_trim_start(stream, "/");
+}
+
+SrsRequest* SrsRequest::as_http()
+{
+    schema = "http";
+    return this;
 }
 
 SrsResponse::SrsResponse()
